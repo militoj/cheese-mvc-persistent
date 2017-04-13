@@ -17,6 +17,10 @@ public class Category {
     private String name;
 
 
+    public Category() { }
+    public Category(String name) { }
+
+
     public int getId() {
         return id;
     }
