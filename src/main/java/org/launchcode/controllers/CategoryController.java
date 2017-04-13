@@ -1,5 +1,6 @@
 package org.launchcode.controllers;
 
+import org.launchcode.models.Category;
 import org.launchcode.models.Cheese;
 import org.launchcode.models.CheeseType;
 import org.launchcode.models.data.CategoryDao;
@@ -31,6 +32,26 @@ public class CategoryController {
         model.addAttribute("categories", categoryDao.findAll());
         model.addAttribute("title", "Categories");
 
-        return "cheese/index";
+        return "category/index";
+    }
+
+    @RequestMapping(value = "add", method = RequestMethod.GET)
+    public String displayAddCategoryForm(Model model) {
+        model.addAttribute("title", "Add Category");
+        model.addAttribute(new Category());
+        return "category/add";
+    }
+
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    public String processAddCategoryForm(Model model, @ModelAttribute  @Valid Category category,
+                                       Errors errors) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Category");
+            return "category/add";
+        }
+
+        categoryDao.save(category);
+        return "redirect:";
     }
 }
