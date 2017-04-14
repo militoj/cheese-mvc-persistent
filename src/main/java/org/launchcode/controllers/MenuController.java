@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -59,5 +60,13 @@ public class MenuController {
 
         menuDao.save(menu);
         return "redirect:view/" + menu.getId();
+    }
+
+
+    @RequestMapping(value = "view/{menuId}", method = RequestMethod.GET)
+    public String viewMenu(Model model, @PathVariable int menuId) {
+        model.addAttribute("title", menuDao.findOne(menuId).getName());
+        model.addAttribute(menuDao.findOne(menuId));
+        return "menu/view";
     }
 }
