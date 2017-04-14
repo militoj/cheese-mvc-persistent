@@ -7,12 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by johnmilito on 4/12/17.
+ * Created by johnmilito on 4/13/17.
  */
-
-
 @Entity
-public class Category {
+public class Menu {
 
     @Id
     @GeneratedValue
@@ -22,19 +20,25 @@ public class Category {
     @Size(min=3, max=15)
     private String name;
 
-    @OneToMany
-    @JoinColumn(name = "category_id")
+    @ManyToMany
     private List<Cheese> cheeses = new ArrayList<>();
 
+    public void addItem(Cheese item){
+        cheeses.add(item);
+    }
 
-    public Category() { }
-    public Category(String name) {
+    public Menu() { }
+    public Menu(String name) {
         this.name = name;
     }
 
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -44,4 +48,9 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Cheese> getCheeses() {
+        return cheeses;
+    }
+
 }
