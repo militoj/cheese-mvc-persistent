@@ -68,4 +68,18 @@ public class MenuController {
         model.addAttribute("menu", menuDao.findOne(menuId));
         return "menu/view";
     }
+
+    @RequestMapping(value = "add-item/{menuId}", method = RequestMethod.GET)
+    public String addItem(Model model, @PathVariable int menuId) {
+
+        Menu menu = menuDao.findOne(menuId);
+
+        AddMenuItemForm form = new AddMenuItemForm(
+                cheeseDao.findAll(), menu
+        );
+
+        model.addAttribute("title", "Add item to menu: " + menu.getName());
+        model.addAttribute("form", form);
+        return "menu/add-item";
+    }
 }
