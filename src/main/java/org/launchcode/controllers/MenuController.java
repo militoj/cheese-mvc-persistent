@@ -83,4 +83,21 @@ public class MenuController {
         model.addAttribute("form", form);
         return "menu/add-item";
     }
+
+    @RequestMapping(value = "add-item", method = RequestMethod.POST)
+    public String addItem(Model model, @ModelAttribute @Valid AddMenuItemForm form, Errors errors) {
+
+
+        if (errors.hasErrors()) {
+            model.addAttribute("form", form);
+            return "menu/add-item";
+        }
+
+        Menu menu = menuDao.findOne(form.getMenuId());
+        Cheese cheese = cheeseDao.findOne(form.getCheeseId());
+        menu.addItem(cheese);
+        menuDao.save(menu);
+
+        return "redirect:/menu/view/" + menu.getId();
+    }
 }
