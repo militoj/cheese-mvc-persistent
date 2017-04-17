@@ -4,11 +4,11 @@
 
 <body class="container">
 
-<h1 th:text=th:text="${menu.name}">Default Title</h1>
+<h1 th:text="${menu.name}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<p th:unless="${menu} and ${menu.size()}">no menu :(</p>
+<p th:unless="${menu}">no menu :(</p>
 
 
 <ul >
