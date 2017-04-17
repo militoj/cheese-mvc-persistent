@@ -12,7 +12,7 @@
 
 
 <ul >
-    <li th:each="menuItem : ${menu}" th:text="${menuItem.name}"></li>
+    <li th:each="menuItem : ${menu.cheeses}" th:text="${menuItem.name}"></li>
 
 </ul>
 <p><a th:href="'/menu/add-item/' + ${menu.id}">Add Cheese</a></p>
